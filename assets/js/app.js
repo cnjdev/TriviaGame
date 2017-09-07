@@ -9,8 +9,14 @@ var skipped = 0;
 // time related variables
 var timeLimit = 30; //30;
 var timeRemain = 0;
-var msBetweenQs = 5000; //5000;
+var msBetweenQs = 10000; //5000;
 var intervalId;
+
+// sounds of the game (more below within questions)
+var themeAudio = "theme.mp3";
+var startAudio = "notafraid.wav";
+// sound being played
+var currentAudio = null;
 
 function startGame(){
 	// reset question variables
@@ -21,15 +27,15 @@ function startGame(){
 	skipped = 0;
 
 	// play intro sound
-	var startAudio = new Audio("assets/sounds/notafraid.wav");
-	startAudio.play();
+	playSound(startAudio);
 
 	// ask the first question
 	setTimeout(askQuestion, msBetweenQs);
 }
 
 function newGame(){
-	$("#splash-screen").hide(); // starting from splash screen
+	// hide the splash screen and stop the theme from playing
+	$("#splash-screen").hide(); 
 	startGame();
 }
 
@@ -60,8 +66,27 @@ function tickSecond(){
 	}
 }
 
+function playSound(sound){
+	// if sound variable is set
+	if (sound != undefined){
+		// if anything currently playing, stop it
+		if (currentAudio != null){
+			currentAudio.pause();
+			currentAudio.currentTime = 0;
+		}
+		// play new sound
+		currentAudio = new Audio("assets/sounds/" + sound);
+		currentAudio.play();
+	}
+}
+
 function showQuestionResult(){
-	$("#correct-answer").html("The correct answer was: <br/><br/>" + currentQuestion.answer);
+	$("#correct-answer").html(currentQuestion.answer);
+
+	// if there is a sound to play, play it
+	playSound(currentQuestion.afterSound);
+
+	$("#question-image").attr("src", "assets/images/" + currentQuestion.image);
 
 	$("#current-question").hide();
 	$("#question-result").show();
@@ -76,6 +101,9 @@ function timeUp(){
 	skipped++;
 	$("#question-score").html("Time's Up!");
 
+	// if there is a sound to play, play it
+	playSound(currentQuestion.wrongSound);
+
 	showQuestionResult();
 }
 
@@ -87,9 +115,16 @@ function selectAnswer(){
 	if (correctAnswer){
 		correct++;
 		$("#question-score").html("Correct!");
-	} else {
+
+		// if there is a sound to play, play it
+		playSound(currentQuestion.rightSound);
+	}
+	else {
 		wrong++;
 		$("#question-score").html("Incorrect");
+
+		// if there is a sound to play, play it
+		playSound(currentQuestion.wrongSound);
  	}
 	
  	showQuestionResult();
@@ -127,6 +162,9 @@ function askQuestion(){
 	// set question
 	$("#question-asked").html(currentQuestion.question);
 	
+	// if there is a sound to play, play it
+	playSound(currentQuestion.beforeSound);
+
 	// add answer buttons
 	$("#question-answers").empty();
 	var answers = [currentQuestion.answer].concat(currentQuestion.wrongAnswers);
@@ -159,41 +197,66 @@ function askQuestion(){
 
 var Questions = [{
 	question: "Why do witches burn?",
+	beforeSound: "mayweburnwitch.wav",
 	answer: "Because they're made of wood.",
+	rightSound: "looney.wav",
+	wrongSound: "tauntsecondtime.wav",
+	image: "witchesburn.gif",
 	wrongAnswers: ["Because they're human.", "Because I said so.", "Because they seek the grail."]
-}, {
-	question: "Which warrior does King Arthur fight?",
-	answer: "The Black Knight",
-	wrongAnswers: ["The Dark Knight", "Batman", "That French guy"]
-}, {
-	question: "What... is your quest?",
-	answer: "To seek the Grail.",
-	wrongAnswers: ["To burn witches.", "To conquer Europe.", "To wear the Crown."]
-}, {
-	question: "What... is your favorite color?",
-	answer: "Blue.",
-	wrongAnswers: ["Blue... No, wait yellow.", "I'm not sure.", "What... is YOUR favorite color?"]
-}, {
-	question: "What... is the airspeed velocity of an unladen swallow?",
-	answer: "African or European?",
-	wrongAnswers: ["I don't know that.", "50 mph", "None."]
-}, {	
-	question: "What... is the capital of Assyria?",
-	answer: "Nineveh",
-	wrongAnswers: ["Damascus", "Alexandria", "Tyre"]
 }, {
 	question: "Which people does King Arthur rule?",
 	answer: "Britons",
+	afterSound: "kingwho.wav",
+	image: "kingofbritons.gif",
 	wrongAnswers: ["Gauls", "Romans", "Huns"]
+}, {
+	question: "Which warrior does King Arthur fight?",
+	answer: "The Black Knight",
+	afterSound: "fartindirection.wav",
+	image: "fartindirection.gif",
+	wrongAnswers: ["The Dark Knight", "Batman", "That French guy"]
 }, {
 	question: "Which limbs does King Arthur cut off from the warrior he fought?",
 	answer: "All four limbs",
+	afterSound: "biteyourlegs.wav",
+	image: "bitelegsoff.gif",
 	wrongAnswers: ["His arms", "His legs", "It was just a flesh wound"]
+}, {
+	question: "What... is your quest?",
+	answer: "To seek the Grail.",
+	afterSound: "whatnamequest.wav",
+	image: "seekgrail.gif",
+	wrongAnswers: ["To burn witches.", "To conquer Europe.", "To wear the Crown."]
+}, {
+	question: "What... is your favorite color?",
+	beforeSound: "favecolor.wav",
+	answer: "Blue.",
+	rightSound: "offyougo.wav",
+	wrongSound: "favcolorwrong.wav",
+	image: "favecolor.gif",
+	wrongAnswers: ["Blue... No, wait yellow.", "I'm not sure.", "What... is YOUR favorite color?"]
+}, {	
+	question: "What... is the capital of Assyria?",
+	beforeSound: "assyria.wav",
+	answer: "Nineveh",
+	rightSound: "offyougo.wav",
+	wrongSound: "idontknow.wav",
+	image: "yourelooney.gif",
+	wrongAnswers: ["Damascus", "Alexandria", "Tyre"]
+}, {
+	question: "What... is the airspeed velocity of an unladen swallow?",
+	beforeSound: "velocity.wav",
+	answer: "African or European?",
+	rightSound: "africanoreuropean.wav",
+	wrongSound: "idontknow.wav",
+	image: "airspeedvelocity.gif",
+	wrongAnswers: ["I don't know that.", "50 mph", "None."]
 }];
 
 
 $(document).ready(function(){
 	$(".inner-container").hide();
+	playSound(themeAudio);
 	$("#splash-screen").show();
 	$("#start-game").click(newGame);
 	$("#restart-game").click(restartGame);

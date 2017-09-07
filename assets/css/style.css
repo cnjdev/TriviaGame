@@ -32,18 +32,6 @@ div.main-container {
 	position: relative;
 }
 
-#game-over {
-
-}
-
-#current-question {
-
-}
-
-#question-result {
-
-}
-
 .possible-answer {
 	font-size: 16px;
 	line-height: 200%;
@@ -70,4 +58,9 @@ div.main-container {
 
 #restart-game {
 	font-size: 28px;
+}
+
+#question-image {
+	width: 300px;
+	height: 200px;
 }

@@ -48,21 +48,23 @@
 
 	<!-- after user answers or times out -->
 	<div id="question-result" class="inner-container">
-		<h2 id="question-score"></h2>
+		<h3 id="question-score"></h3>
+		<img id="question-image" src="http://via.placeholder.com/300x200" />
+		<h6>The correct answer was:</h6>
+		<h5 id="correct-answer"></h5>
 		<br/>
-		<h3 id="correct-answer"></h3>
-		<br/>
-		<h4 id="next-question">Stay tuned for the next question!</h4>
+		<h6 id="next-question">Stay tuned for the next question!</h6>
 	</div>
 
 	<!-- when the game ends -->
 	<div id="game-over" class="inner-container">
-		<h1>Game Over</h1>
-		<br/>
 		<h2>Game Results</h2>
+		<h4 id="game-results"></h4>
+		
+		<iframe width="300" height="200" src="https://www.youtube.com/embed/dPOyOM7wxlE" frameborder="0" allowfullscreen></iframe>
+		
 		<br/>
-		<h3 id="game-results"></h3>
-		<br/>
+		
 		<button id="restart-game" type="button" class="btn btn-link btn-lg">Play Again?</button>
 	</div>
 	
