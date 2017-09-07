@@ -61,7 +61,7 @@ function tickSecond(){
 }
 
 function showQuestionResult(){
-	$("#correct-answer").html("The correct answer was: <br/>" + currentQuestion.answer);
+	$("#correct-answer").html("The correct answer was: <br/><br/>" + currentQuestion.answer);
 
 	$("#current-question").hide();
 	$("#question-result").show();
@@ -133,13 +133,17 @@ function askQuestion(){
 	for (answer of answers){
 		// for each answer
 		var answerButton = $("<button>");
+		answerButton.attr("type", "button");
 		answerButton.attr("class", "btn btn-link possible-answer");
 		answerButton.html(answer);
 		$("#question-answers").append(answerButton);
 	}
 
-	$(".possible-answer").on("click", selectAnswer);
+	// sort answers in random order
 	$("#current-question").randomize("#question-answers", ".possible-answer");
+
+	// put events here 
+	$(".possible-answer").on("click", selectAnswer);
 
 	// reset timer
 	timeRemain = timeLimit;
