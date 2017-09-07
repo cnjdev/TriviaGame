@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Trivia Game!</title>
+
+	<!-- reset css -->
+	<link rel="stylesheet" href="assets/css/reset.css">
+
+	<!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+	<!-- jquery included -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+	<!-- jquery extension -->
+	<script src="assets/js/jquery-extend.js"></script>
+
+	<!-- custom css -->
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<div class="main-container">
+
+	<!-- Splash Screen -->
+	<div id="splash-screen" class="inner-container">
+		<button id="start-game" type="button" class="btn btn-link btn-lg">Start Trivia Game</button>
+	</div>
+
+	<!-- while Question is being asked -->
+	<div id="current-question" class="inner-container">
+		<div class="progress">
+	    <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width:100%">
+	    </div>
+	  </div>
+	  <h3 id="time-remaining">Time Remaining: </h3>
+	  <br/>
+	  <h2 id="question-asked"></h2>
+	  <br/>
+	  <div id="question-answers"></div>
+	  <br/>
+	</div>
+
+	<!-- after user answers or times out -->
+	<div id="question-result" class="inner-container">
+		<h2 id="question-score"></h2>
+		<br/>
+		<h3 id="correct-answer"></h3>
+		<br/>
+		<h4 id="next-question">Stay tuned for the next question!</h4>
+	</div>
+
+	<!-- when the game ends -->
+	<div id="game-over" class="inner-container">
+		<h1>Game Over</h1>
+		<br/>
+		<h2>Game Results</h2>
+		<br/>
+		<h3 id="game-results"></h3>
+		<br/>
+		<button id="restart-game" type="button" class="btn btn-link btn-lg">Play Again?</button>
+	</div>
+	
+</div>
+<script type="text/javascript" src="assets/js/app.js"></script>
+</body>
+</html>
