@@ -135,6 +135,18 @@ function gameOver(){
  	$("#question-result").hide();
  	$("#game-over").show();
 
+  // Finds all iframes from youtubes and gives them a unique class
+  $('iframe[src*="https://www.youtube.com/embed/"]').addClass("youtube-iframe");
+  $("#restart-game").click(function() {
+    // changes the iframe src to prevent playback or stop the video playback in our case
+    $('.youtube-iframe').each(function(index) {
+      $(this).attr('src', $(this).attr('src'));
+      return false;
+    });
+    //click function
+  });
+
+
  	// tabulate results
  	var gameResults = "";
  	gameResults += "Correct: " + correct + "<br/>";
