@@ -39,7 +39,8 @@ div.main-container {
 }
 
 .possible-answer:hover {
-	background-color: #ccc;
+	background-color: #337ab7;
+	color: #fff;
 	text-decoration: none;
 }
 
@@ -67,4 +68,11 @@ div.main-container {
 
 .inner-container {
 	margin-top: 0px;
+}
+
+#current-question,
+#question-result,
+#game-over
+{
+	display: none
 }

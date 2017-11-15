@@ -1,23 +1,23 @@
 
 // # questions variables
-var Questions = [];
-var currentQuestion = {};
-var asked = 0;
-var correct = 0;
-var wrong = 0;
-var skipped = 0;
+let Questions = [];
+let currentQuestion = {};
+let asked = 0;
+let correct = 0;
+let wrong = 0;
+let skipped = 0;
 
 // time related variables
-var timeLimit = 30;
-var timeRemain = 0;
-var msBetweenQs = 10000; //5000;
+const timeLimit = 30;
+let timeRemain = 0;
+const msBetweenQs = 10000; //5000;
 var intervalId;
 
 // sounds of the game (more below within questions)
-var themeAudio = "theme.mp3";
-var startAudio = "notafraid.wav";
+const themeAudio = "theme.mp3";
+const startAudio = "notafraid.wav";
 // sound being played
-var currentAudio = null;
+let currentAudio = null;
 
 function startGame(){
 	// reset question variables
@@ -50,7 +50,7 @@ function restartGame(){
 
 function updateTimeRemaining(){
 	// update text for time remaining
-	$("#time-remaining").html("Time Remaining: " + timeRemain + " seconds");
+	$("#time-remaining").html(`Time Remaining: ${timeRemain} seconds`);
 
 	// update progress bar for time remaining
 	var timePercent = Math.floor(timeRemain / timeLimit * 100);
@@ -94,6 +94,12 @@ function showQuestionResult(){
 
 	$("#current-question").hide();
 	$("#question-result").show();
+
+	if (asked >= Questions.length){
+		$("#next-question").hide();
+	} else {
+		$("#next-question").show();
+	}
 
 	setTimeout(nextQuestion, msBetweenQs);	
 }
@@ -141,6 +147,7 @@ function gameOver(){
 
   // Finds all iframes from youtubes and gives them a unique class
   $('iframe[src*="https://www.youtube.com/embed/"]').addClass("youtube-iframe");
+  // add listener for restarting game to stop the video playing
   $("#restart-game").click(function() {
     // changes the iframe src to prevent playback or stop the video playback in our case
     $('.youtube-iframe').each(function(index) {
@@ -150,13 +157,12 @@ function gameOver(){
     //click function
   });
 
-
- 	// tabulate results
- 	var gameResults = "";
- 	gameResults += "Correct: " + correct + "<br/>";
- 	gameResults += "Incorrect: " + wrong + "<br/>";
- 	gameResults += "Skipped: " + skipped + "<br/>";
- 	$("#game-results").html(gameResults);
+ 	// show game results
+ 	$("#game-results").html(`
+	 	Correct: ${correct} <br/>
+	 	Incorrect: ${wrong} <br/>
+	 	Skipped: ${skipped} <br/>
+ 	`);
 }
 
 function nextQuestion(){

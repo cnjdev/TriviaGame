@@ -41,14 +41,17 @@
 
 	<!-- while Question is being asked -->
 	<div id="current-question" class="inner-container">
+		<!-- Time Remaining to answer question -->
 		<div class="progress">
 	    <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width:100%">
 	    </div>
 	  </div>
 	  <h3 id="time-remaining">Time Remaining: </h3>
 	  <br/>
+	  
 	  <h2 id="question-asked"></h2>
 	  <br/>
+
 	  <div id="question-answers"></div>
 	  <br/>
 	</div>
@@ -56,11 +59,14 @@
 	<!-- after user answers or times out -->
 	<div id="question-result" class="inner-container">
 		<h3 id="question-score"></h3>
+
 		<img id="question-image" src="http://via.placeholder.com/300x200" />
-		<h6>The correct answer was:</h6>
-		<h5 id="correct-answer"></h5>
+		
+		<h5>The correct answer was:</h5>
+		<h4 id="correct-answer"></h4>
 		<br/>
-		<h6 id="next-question">Stay tuned for the next question!</h6>
+
+		<h5 id="next-question">Stay tuned for the next question!</h5>
 	</div>
 
 	<!-- when the game ends -->
@@ -69,7 +75,6 @@
 		<h4 id="game-results"></h4>
 		
 		<iframe width="300" height="200" src="https://www.youtube.com/embed/dPOyOM7wxlE" frameborder="0" allowfullscreen></iframe>
-		
 		<br/>
 		
 		<button id="restart-game" type="button" class="btn btn-link btn-lg">Play Again?</button>
